@@ -38,9 +38,9 @@ document.body.className = styles.body;
               <div className={"container "}>
                 <div className="row">
                   <div className="align-items-center">
-                    <h1>Licensed &amp; Affordable</h1>
+                    <h1>Licensed</h1> 
                     <p className={""  + styles.mainText}>
-                      Family-owned company that specializes in  Cleaning services in Phoenix, Peoria, Glendale, Surprise, Goodyear and beyond.
+                      Family-owned company that specializes in  Cleaning services in Phoenix and Valley Area, Peoria, Glendale, Surprise, Goodyear and beyond.
                     </p>
                     <button type="button" className={"btn btn-outline-light btn-lg " + styles.btnCarousel} onclick="window.location.href='#'">
                       <i className="fa-solid fa-broom" /> VIEW CLEANING SERVICES
@@ -64,7 +64,7 @@ document.body.className = styles.body;
           <div className="row">
             <div className= {styles.featureBox + " col-lg-4"}>
               <i className={"fa-solid fa-medal fa-4x " + styles.featureIcon}/>
-              <h3>Satisfaction Guarantee.</h3>
+              <h3>Satisfaction Guaranteed.</h3>
             </div>
             <div className={styles.featureBox + " col-lg-4"}>
               <i className={"fa-solid fa-truck fa-4x " + styles.featureIcon} />
@@ -84,8 +84,7 @@ document.body.className = styles.body;
             <div className={"col-lg " + styles.colForm}>
               <h2 className={styles.welcome}>Welcome To Dreamco Cleaning</h2>
               <p className={styles.welcome}>
-                The Most Affordable reliable Company for your Cleaning Needs.<br /> Dreamco Cleaning is an Arizona family owned business that provides residential and commercial cleaning.Our company will deliver quality results and outstanding customer experience with uncompromising integrity to ensure the customer satisfaction on every single job.
-              </p>
+                The Most reliable Company for your Cleaning Needs.<br /> Dreamco Cleaning is an Arizona family owned business that provides short term and commercial cleaning. Our company will deliver quality results and outstanding customer experience.</p>
               <div className="text-center">
                 <button type="button" className={"btn " + styles.btnDark + " btn-dark center-icon"} onclick>
                   <span>More info </span><i className="fa-solid fa-arrow-right" />
