@@ -1,0 +1,47 @@
+/*NavBar*/
+* {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    
+}
+
+.body {
+    overflow-x: hidden;
+    font-family: Sans-Serif;
+    margin: 0;
+  }
+
+  .menu{
+    border-top: 7px solid #ff5137 ;
+  }
+  
+  .menuLink {
+    text-decoration: none;
+    color: #e8584e;
+    transition: color 0.3s ease;
+  }
+  
+  
+ 
+  
+  .menuUl {
+    list-style: none;
+    color: #a64342;
+    margin-bottom: 0%;
+    margin-left:10%;
+  }
+  
+  
+  .menuLi {
+    padding-right: 2rem;
+    font-size: 22px;
+    color: #a64342;
+    margin-bottom: 0%;
+
+  }
+
+  /* mobile styles */
+  

@@ -1,0 +1,355 @@
+
+.mainRoot {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.body {
+    overflow-x: hidden;
+    font-family: Sans-Serif;
+    margin: 0;
+    background-color: #fff;
+    width: 100%;
+  }
+
+/*Carousel*/
+#mainCarousel .carouselInerDirty img {
+    max-height: 50vh;
+    object-fit: cover;
+    filter: grayscale(50%);
+}
+
+#carouselDirty {
+    position: relative;
+    margin-top: 0%;
+}
+
+.overlay {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    padding-top: 5%;
+    display: flex;
+    align-items:  center;
+}
+
+
+/*Main Content*/
+
+#mainCarousel h1 {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+#mainCarousel p {
+    font-size: 2rem;
+    font-weight: lighter;
+}
+
+.btnCarousel{
+    margin: 2% 3% 5% 0;
+}
+
+/*Features*/
+#features{
+    padding: 1% 10%;    
+    background-color: #fdf7e6;
+}
+
+#features h3{
+    font-weight: 900;
+}
+#features p{
+    color: #8f8f8f;
+}
+
+.featureBox{
+    text-align: center;
+    padding: 5%;
+}
+
+.featureIcon{
+    color: #a64342;
+    margin-bottom: 1rem;
+}
+
+.featureIcon:hover{
+    color: #ff5137;
+}
+
+
+
+/* Secion welcome */
+#welcome > div{
+  margin-top: 5%;
+}
+
+h2.welcome{
+color: #a64342;
+font-weight: bold;
+}
+
+.welcome{
+ padding-left: 2rem; 
+}
+
+.rowDirty .align-items-center{
+  margin-bottom: 10%;
+}
+
+
+.responsive {
+  width: 100%;
+  height: auto;
+  border-radius: 50px;
+  align-items: right;
+}
+
+.btnDark{
+  background-color:#e8584e;
+  width: 20%;
+  height: 35%;
+  text-align:center;
+  padding: 12px;;
+}
+
+
+
+
+.titleServices {
+
+  color: #a64342;
+  font-family:'Montserrat', sans-serif;
+  text-align: center;
+  margin-top:2%;
+  margin-bottom :5%;
+  font-weight: bold;
+}
+
+
+
+
+
+
+.cardDirty {
+  width:28rem;
+  height: min-content;
+  margin: 10px;
+  background-color:none;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.cardDirty img{
+  width: 100%;
+  height: auto;
+}
+
+.cardDirty:hover .cardCaption {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.cardDirty:hover .cardImage {
+  transform: translateY(-10px);
+}
+.cardDirty:hover .cardThumb::after {
+  top: 0;
+}
+.cardDirty:hover .cardSnippet {
+  margin: 20px 0;
+}
+.cardThumb {
+  position: relative;
+  max-height: auto;
+  overflow: hidden;
+  margin:  0;
+}
+
+
+/* index form */
+
+.renderedForm{
+  margin: 7rem;
+}
+#welcome > div > div:nth-child(3){
+  border: solid #e8584e;
+}
+
+@media (min-width: 1024px) {
+  .cardThumb {
+    max-height: 500px;
+  }
+}
+.cardThumb::after {
+  position: absolute;
+  top: 0;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 40%, rgba(255, 255, 255, 0) 100%);
+  transition: 0.3s;
+}
+@media (min-width: 1024px) {
+  .cardThumb::after {
+    top: calc(100% - 140px);
+  }
+}
+.cardImage {
+  transition: 0.5s ease-in-out;
+}
+.cardCaption {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  padding: 0 20px;
+  color: white;
+  transform: translateY(-50%);
+  text-align: center;
+  transition: 0.3s;
+}
+@media (min-width: 1024px) {
+  .cardCaption {
+    top: calc(100% - 110px);
+    transform: unset;
+  }
+}
+.cardTitle {
+  display: -webkit-box;
+  max-height: 85px;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 23px;
+  line-height: 28px;
+  text-shadow: 0px 1px 5px black;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.cardSnippet {
+  display: -webkit-box;
+  max-height: 150px;
+  margin: 20px 0;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  transition: 0.5s ease-in-out;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+@media (min-width: 1024px) {
+  .cardSnippet {
+    margin: 60px 0;
+  }
+
+}
+
+@media only screen and (max-width: 1024px){
+#mainCarousel p {
+    font-size: .7rem;
+    font-weight: lighter;
+}
+#mainCarousel h1 {
+  font-size: 1.5rem;
+}
+
+#mainCarousel button {
+  font-size: .7rem;
+}
+
+#mainCarousel i{
+  height: fit-content;
+  font-size: .7rem;
+}
+
+.btnDark{
+  width: 50%;
+  height: 35%;
+}
+
+.renderedForm{
+  margin: 1rem;
+}
+
+.colForm{
+  padding: 10px;
+  margin-top: 1.5rem;
+}
+
+/* services */
+.cardDirty {
+  width:20rem;
+  background-color:none;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+
+}
+
+@media only screen and (min-width: 1300px){
+      #mainCarousel p {
+        font-size: 1.5rem;
+        font-weight: lighter;
+    }
+    #mainCarousel h1 {
+      font-size: 1.5rem;
+    }
+
+    #mainCarousel button {
+      font-size: .7rem;
+    }
+
+    #mainCarousel i{
+      height: fit-content;
+      font-size: .7rem;
+    }
+
+    .btnDark{
+      width: 50%;
+      height: 35%;
+    }
+
+    .renderedForm{
+      margin: 1rem;
+    }
+
+    .colForm{
+      padding: 10px;
+      margin-top: 1.5rem;
+    }
+
+    /* services */
+    .cardDirty {
+      width:20rem;
+      background-color:none;
+      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+    }
+}
+.cardButton {
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  border: 1px solid white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.cardButton:hover {
+  color: black;
+  background-color: white;
+}
+
+
