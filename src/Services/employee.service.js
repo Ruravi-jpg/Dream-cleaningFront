@@ -41,19 +41,18 @@ const put = async(EmployeeUpdateModel, employeeId) => {
 }
 
 const GetAll = async () =>{
-     return await http
+     let data = await http
     .get(API_EMPLOYEE_URL,
         {
             headers:{
                 'Authorization' : authHeader()
             }
         })
-        .then(response =>{
-            return response.data;
-        })
         .catch(error =>{
             console.log(error);
         })
+
+    return data.data;
 }
 
 const EmployeeService = {

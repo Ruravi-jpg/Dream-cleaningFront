@@ -2,6 +2,7 @@
   "name": "dream-cleaning",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://dreamcocleaning.com",
   "dependencies": {
     "@popperjs/core": "^2.11.5",
     "@tanstack/react-table": "^8.5.11",
@@ -15,6 +16,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "rsuite": "^5.16.6",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

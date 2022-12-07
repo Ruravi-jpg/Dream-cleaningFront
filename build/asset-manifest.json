@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7fa1ca6a.css",
+    "main.js": "/static/js/main.c340bd9b.js",
+    "static/media/cleaning-house.JPG": "/static/media/cleaning-house.7e947e07185b7894e99d.JPG",
+    "static/media/carruse-03.JPG": "/static/media/carruse-03.15a8698971cafe050249.JPG",
+    "static/media/WelcomeTo.JPG": "/static/media/WelcomeTo.f1a3c299d6f6384be487.JPG",
+    "static/media/cleaning-airbnb.JPG": "/static/media/cleaning-airbnb.0388bc9f979fe10fc8ae.JPG",
+    "static/media/carrusel-01.JPG": "/static/media/carrusel-01.ced6ea69438f9980798c.JPG",
+    "static/media/carerusel-02.JPG": "/static/media/carerusel-02.ecfd84575ad762116af2.JPG",
+    "static/media/logodreamco-ConvertImage.png": "/static/media/logodreamco-ConvertImage.12875386bf957b4796fa.png",
+    "index.html": "/index.html",
+    "main.7fa1ca6a.css.map": "/static/css/main.7fa1ca6a.css.map",
+    "main.c340bd9b.js.map": "/static/js/main.c340bd9b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7fa1ca6a.css",
+    "static/js/main.c340bd9b.js"
+  ]
+}

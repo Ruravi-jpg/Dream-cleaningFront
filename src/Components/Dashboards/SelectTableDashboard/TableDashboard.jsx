@@ -29,7 +29,7 @@ return(
     <div className={"box " + styles.boxDirty + " " + styles.blue}>
       <h2>Propierties</h2>
       <img className={styles.img} src={PropiertyLogo} alt="" />
-      <a href="/form-upload-employee.html"><div className={styles.myCtaButton}>View</div></a>
+      <a href="/properties"><div className={styles.myCtaButton}>View</div></a>
     </div>
   </div>
 </div>

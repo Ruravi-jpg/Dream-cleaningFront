@@ -8,6 +8,8 @@ import EmployeeViewList from "./Pages/EmployeeViewList.js";
 import SelectTable from "./Pages/SelectTable.js";
 import authService from "./Services/auth.service.js";
 import PortectedRoute from "./Components/ProtectedRoute/ProtectedRoute.jsx";
+import AddProperty from "./Pages/AdddProperty.js";
+import PropertiesViewList from "./Pages/PropertyViewList.js";
 
 function App() {
 let [currentUser, setCurrentUser] = useState(null);
@@ -18,7 +20,6 @@ useEffect(() =>{
   authService.getCurrentUser()
   .then(res =>{
     setCurrentUser(res);
-    console.log(res);
   })
   .catch(err =>{
     console.log(err);
@@ -38,7 +39,9 @@ useEffect(() =>{
     <Route element = {<PortectedRoute Token={currentUser}/>}>
       <Route path="/dashboard"  element={ <Dashboard userData={currentUser}/> }></Route>
       <Route path="/register" element={ <AddEmployee user={currentUser} /> }></Route>
+      <Route path="/register-property" element={ <AddProperty user={currentUser} /> }></Route>
       <Route path="/employees" element={ <EmployeeViewList user ={currentUser} /> }></Route>
+      <Route path="/properties" element={ <PropertiesViewList user ={currentUser} /> }></Route>
       <Route path="/tableDashboard" element={<SelectTable userData = {currentUser} />}></Route>
     </Route>
     

@@ -66,10 +66,7 @@ function Footer(){
                   <h6 className="text-uppercase fw-bold">Business Hours</h6>
                   <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{width: '60px', backgroundColor: '#ffd26b', height: '2px'}} />
                   <p>
-                    <a href="#!" className="text-dark">From Monday to Friday - 8am - 5pm</a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-dark">saturday and sunday - closed </a>
+                    <a href="#!" className="text-dark">From Monday to Sunday - 8am - 5pm</a>
                   </p>
                 </div>
                 {/* Grid column */}
@@ -78,8 +75,8 @@ function Footer(){
                   {/* Links */}
                   <h6 className="text-uppercase fw-bold">Contact</h6>
                   <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{width: '60px', backgroundColor: '#ffd26b', height: '2px'}} />
-                  <p><i className="fas fa-home mr-3" /> New York, NY 10012, US</p>
-                  <p><i className="fas fa-envelope mr-3" /> info@example.com</p>
+                  <p><i className="fas fa-home mr-3" /> 5126 W Diana Ave, Glendale, AZ 85302</p>
+                  {/* <p><i className="fas fa-envelope mr-3" /> info@example.com</p> */}
                   <p><i className="fas fa-phone mr-3" /> +(623) 226-0192</p>
                   {/* Grid column */}
                 </div>
