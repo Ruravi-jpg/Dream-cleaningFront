@@ -18,7 +18,6 @@ function ListProperties() {
 
   document.body.className = ""
   const [showModalProperty, setShowModalProperty] = useState(false);
-
   const [modalDataProperty, setModalDataProperty] = useState({
     id: 0,
      Alias: "", 
@@ -32,6 +31,8 @@ function ListProperties() {
      PropertyEmployees : []
     });
   const [data, setData] = useState([]);
+
+  const [employeeList, setEmployeeList] = useState([]);
 
 
 
@@ -56,8 +57,16 @@ function ListProperties() {
   const { Column, HeaderCell, Cell } = Table;
 
   const fetchData = async () => {
-    const response = await PropertyService.GetAll();
+    let response = await PropertyService.GetAll();
     setData(response);
+
+    await EmployeeService.GetAll()
+    .then(res =>{
+        const data = res.map(
+            item => ({label: item.user.username, value: item.id})
+        );
+        setEmployeeList(data);        
+    })
   }
 
   //sorting
@@ -154,7 +163,7 @@ function ListProperties() {
           </Column>
         </Table>
       </div>
-        <PropertyModal fetchData={fetchData} data={modalDataProperty} setData={setModalDataProperty} showModalProperty={showModalProperty} setShowModalProperty={setShowModalProperty}></PropertyModal>
+        <PropertyModal fetchData={fetchData} data={modalDataProperty} setData={setModalDataProperty} showModalProperty={showModalProperty} setShowModalProperty={setShowModalProperty} allEmployeeList={employeeList} ></PropertyModal>
     </>
 
 

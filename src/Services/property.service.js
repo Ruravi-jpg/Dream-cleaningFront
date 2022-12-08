@@ -20,10 +20,10 @@ const post = async (PropertyCreateModel) =>{
         })
 }
 
-const put = async(EmployeeUpdateModel, employeeId) => {
+const put = async(PropertyUpdateModel, propertyId) => {
     return await http
-    .put(API_PROPERTY_URL + "/" + employeeId,
-    EmployeeUpdateModel,
+    .put(API_PROPERTY_URL + "/" + propertyId,
+    PropertyUpdateModel,
         {
             headers:{
                 'Authorization' : authHeader(),
