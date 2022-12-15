@@ -1,7 +1,8 @@
 
 import { useEffect } from "react";
 import { useState, React } from "react";
-import { Form, Button, Modal, Notification, useToaster, TagPicker, List, SelectPicker } from 'rsuite';
+import { Form, Button, Modal, Notification, useToaster, IconButton, List, SelectPicker, FlexboxGrid } from 'rsuite';
+import FormControl from "rsuite/esm/FormControl";
 import PropertyUpdateModel from "../../Models/PropertyUpdateModal";
 import EmployeeService from "../../Services/employee.service";
 import PropertyService from "../../Services/property.service";
@@ -15,22 +16,27 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
   const [referencePhotosList, setReferencePhotosList] = useState([]);
   const [fetchingImages, setFetchingImages] = useState(true);
   const [curEmployeeList, setCurEmployeeList] = useState([]);
+  const [propertyData, setPropertyData] = useState([]);
   const toaster = useToaster();
 
+
+  let selectData = allEmployeeList.map(
+    item => ({ label: item.user.username, value: item.id })
+  )
+
   useEffect(() => {
-    if (showModalProperty){
+    if (showModalProperty) {
       fetchPhotos();
-      if(data.employeesList != null){
+      if (data.employeesList != null) {
         setCurEmployeeList(data.employeesList)
-        
       }
+
+      setPropertyData(data);
+
     }
-      
+
   }, [showModalProperty])
 
-  useEffect(() =>{
-    console.log(curEmployeeList)
-  }, [curEmployeeList])
 
   useEffect(() => {
     if (fetchingImages === true)
@@ -38,9 +44,15 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
     if (editingPhotos !== true)
       return;
 
+    if (showModalProperty !== true)
+      return;
+
+
     setIsEditing(true);
 
   }, [referencePhotosList])
+
+
 
 
 
@@ -64,63 +76,97 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
   }
 
   const handleClose = () => {
-    setShowModalProperty(false);
     setIsEditingPhotos(false);
+    setShowModalProperty(false);
     setIsEditing(false);
   }
 
-  useEffect(() => {
-    setIsEditing(true);
-  }, [editingPhotos])
 
   const handleEdit = async () => {
-    console.log(data)
     let employeeIdList = curEmployeeList.map(employee => employee.id);
 
     let update = new PropertyUpdateModel(
-      data.alias,
-      data.address,
-      data.btwnStreet1,
-      data.btwnStreet2,
-      data.hoursService,
-      data.costService,
-      data.comments,
+      propertyData.alias,
+      propertyData.address,
+      propertyData.btwnStreet1,
+      propertyData.btwnStreet2,
+      propertyData.hoursService,
+      propertyData.costService,
+      propertyData.comments,
       employeeIdList
     )
     console.log(update)
-    setShowModalProperty(false);
-    setIsEditing(false);
-    const postResponse = await PropertyService.put(update, data.id);
-    if (postResponse) {
-      toaster.push(messageSuccess)
-    } else {
-      toaster.push(messageError)
+    
+    
+    
+
+    //if we are only editing th data and not the images
+    if (!editingPhotos) {
+      console.log("editing only data");
+      const postResponse = await PropertyService.put(update, propertyData.id);
+      if (postResponse) {
+        toaster.push(messageSuccess);
+      } else {
+        toaster.push(messageError)
+      }
+      //if we are editing the images
+    }else{
+      
+      const postResponse = await PropertyService.put(update, propertyData.id);
+      if (postResponse) {
+        //if the put of property and wee are editing the photo list we can try to post the new photos
+        if (editingPhotos) {
+          let resPhotos = await PropertyService.postPhotos(referencePhotosList, propertyData.id);
+          if (resPhotos.status === 204) {
+            toaster.push(messageSuccess);
+          } else {
+            toaster.push(messageErrorImage(resPhotos.response.data));
+          }
+        }
+      } else {
+        toaster.push(messageError)
+      }
     }
+
+    setIsEditingPhotos(false);
+    setIsEditing(false);
+    setShowModalProperty(false);
     fetchData();
   }
 
-  const onEmployeeListChange = (value) =>{
-    if(value == null){
-        return;
+  const onEmployeeListChange = (value) => {
+    if (value == null) {
+      return;
     }
-    
-    console.log()
 
-    const userToAdd = allEmployeeList.filter(e => e.value === value);
+    const userToAdd = allEmployeeList.filter(e => e.id === value);
 
-    console.log(data.employeesList)
-    console.log(userToAdd)
-    
-    
-    // await EmployeeService.GetAll()
-    // .then(res =>{
-    //     const data = res.map(
-    //         item => ({label: item.user.username, value: item.id})
-    //     );
-    //     setEmployeeList(data);        
-    // })
+    let isInList = false;
 
-}
+    for (let i = 0; i < curEmployeeList.length; i++) {
+      if (curEmployeeList[i].id === userToAdd[0].id) {
+        isInList = true;
+        break;
+      }
+    }
+
+
+    if (!isInList) {
+      setIsEditing(true);
+      let newArray = curEmployeeList.concat(userToAdd);
+      setCurEmployeeList(newArray);
+    }
+  }
+
+  const removeEmployeeFromList = (id) => {
+    setIsEditing(true);
+
+    console.log("Removing employee wit id: ", id)
+
+    let newArray = curEmployeeList.filter(employee => employee.id !== id);
+
+    setCurEmployeeList(newArray);
+  }
 
   const messageSuccess = (
     <Notification type={"success"} header={"Success"} closable>
@@ -137,43 +183,104 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
     </Notification>
   );
 
+  const messageErrorImage = (message) => (
+    <Notification type={"error"} header={"Error"} duration={10000}>
+      <p>There was an error while uploading the images</p>
+      <p>The image(s) could not be uploaded, but the rest of the data was uploaded successfully</p>
+      <p>Error:</p>
+      <p>{message}</p>
+      <hr />
+    </Notification>
+  );
+
 
   return (
     <>
-      <Modal size={"md"} open={showModalProperty} onClose={handleClose}>
+      <Modal size={"md"} open={showModalProperty} onClose={handleClose} overflow={false} >
         <Modal.Header>
           <Modal.Title>Property Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
-          <Form fluid onChange={setData} formValue={data}>
+          <Form fluid onChange={setPropertyData} formValue={propertyData}>
             <Form.Group controlId="alias-9">
-              <Form.ControlLabel>Property Alias</Form.ControlLabel>
+              <Form.ControlLabel> <b>Property Alias</b> </Form.ControlLabel>
               <Form.Control name="alias" onChange={() => { setIsEditing(true) }} />
             </Form.Group>
             <Form.Group controlId="address-9">
-              <Form.ControlLabel>Property Address</Form.ControlLabel>
+              <Form.ControlLabel><b>Property Address</b></Form.ControlLabel>
               <Form.Control name="address" onChange={() => { setIsEditing(true) }} />
             </Form.Group>
             <Form.Group controlId="btwnStreet1-9">
-              <Form.ControlLabel>Reference Street 1</Form.ControlLabel>
+              <Form.ControlLabel> <b>Reference Street 1</b> </Form.ControlLabel>
               <Form.Control name="btwnStreet1" onChange={() => { setIsEditing(true) }} />
             </Form.Group>
             <Form.Group controlId="btwnStreet2-9">
-              <Form.ControlLabel>Reference Street 2</Form.ControlLabel>
+              <Form.ControlLabel> <b>Reference Street 2</b> </Form.ControlLabel>
               <Form.Control name="btwnStreet2" onChange={() => { setIsEditing(true) }} />
             </Form.Group>
             <Form.Group controlId="hoursService-9">
-              <Form.ControlLabel>Estimated Hours of service</Form.ControlLabel>
+              <Form.ControlLabel> <b>Estimated Hours of service</b> </Form.ControlLabel>
               <Form.Control type="number" name="hoursService" onChange={() => { setIsEditing(true) }} />
             </Form.Group>
             <Form.Group controlId="costService-9">
-              <Form.ControlLabel>Estimated Cost of service</Form.ControlLabel>
+              <Form.ControlLabel> <b>Estimated Cost of service</b> </Form.ControlLabel>
               <Form.Control type="number" name="costService" onChange={() => { setIsEditing(true) }} />
             </Form.Group>
             <Form.Group controlId="textarea-9">
-              <Form.ControlLabel>Comments</Form.ControlLabel>
-              <Form.Control rows={5} name="comments" onChange={() => { setIsEditing(true) }} />
+              <Form.ControlLabel> <b>Comments</b> </Form.ControlLabel>
+              <Form.Control rows={5} name="comments" />
+            </Form.Group>
+            <Form.Group controlId="employeesList-9">
+              <Form.ControlLabel> <b>Assigned Employees</b> </Form.ControlLabel>
+
+              <FormControl name="EmployeeListPicker" data={selectData} accepter={SelectPicker} style={{ width: 224, zIndex: 1000 }} onChange={(value) => onEmployeeListChange(value)} />
+              <br />
+              <br />
+              <List>
+                {
+                  curEmployeeList ? (
+                    curEmployeeList.map(employee => {
+                      return (
+                        <List.Item
+                          key={employee.id}
+                        >
+                          <FlexboxGrid>
+                            <FlexboxGrid.Item
+                              style={{
+                                display: 'flex',
+                                justifyContent: 'left',
+                                alignItems: 'left',
+                                height: '30px',
+                                width: '200px'
+                              }}
+                            >
+                              {employee.name}
+                            </FlexboxGrid.Item>
+                            <FlexboxGrid.Item
+                              style={{
+                                display: 'flex',
+                                justifyContent: 'left',
+                                alignItems: 'left',
+                                height: '30px'
+
+                              }}
+                            >
+                              <IconButton icon={<i className="bi bi-x-circle"></i>} circle size="md" style={{ color: 'red', background: "#ffffff" }} onClick={() => removeEmployeeFromList(employee.id)} />
+                            </FlexboxGrid.Item>
+                          </FlexboxGrid>
+                        </List.Item>
+                      )
+                    })
+                  ) :
+                    <List.Item > No Employees </List.Item>
+                }
+              </List>
+
+              <br />
+
+
+
             </Form.Group>
             <Form.Group controlId="referencePhotosList-9">
               <Form.Group>
@@ -193,27 +300,7 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
                 }
               </Form.Group>
             </Form.Group>
-            <Form.Group controlId="employeesList-9">
-              <Form.ControlLabel>Assigned Employees</Form.ControlLabel>
-              
-              <List>
-                {
-                  data.employeesList ? (
-                    data.employeesList.map(employee => {
-                      return (<List.Item key={employee.id}> { employee.name} </List.Item>)
-                    })
-                  ):
-                  <List.Item > No Employees </List.Item>
-                }
-              </List>
-                <br />
-              <SelectPicker 
-              data={allEmployeeList} 
-              style={{ width: 224 }} 
-              onChange={(value) => onEmployeeListChange(value)}
-              />
 
-            </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>

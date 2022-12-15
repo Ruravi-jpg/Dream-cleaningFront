@@ -48,12 +48,6 @@ function ListProperties() {
     tableHeader[i].classList.add(styles.tableHeader);
   }
 
-  //table row
-  let tableRow = document.getElementsByClassName("rs-table-cell-last");
-  for (let i = 0; i < tableRow.length; i++) {
-    tableRow[i].classList.add(styles.rsTableRow);
-  }
-
   const { Column, HeaderCell, Cell } = Table;
 
   const fetchData = async () => {
@@ -62,10 +56,10 @@ function ListProperties() {
 
     await EmployeeService.GetAll()
     .then(res =>{
-        const data = res.map(
-            item => ({label: item.user.username, value: item.id})
-        );
-        setEmployeeList(data);        
+        // const data = res.map(
+        //     item => ({label: item.user.username, value: item.id})
+        // );
+        setEmployeeList(res);        
     })
   }
 
@@ -119,7 +113,7 @@ function ListProperties() {
         <br /><br /><br /><br /><br /><hr className={styles.hr} />
         <h1>Employee List</h1>
       </div>
-      <div className={"container " + styles.tableContainer}>
+      <div className={"container "}>
         <Table
           cellBordered
           hover={false}
@@ -130,9 +124,12 @@ function ListProperties() {
           onSortColumn={handleSortColumn}
           loading={loading}
           wordWrap="break-word"
+          style={{
+            fontSize:'22px'
+          }}
         >
-          <Column flexGrow={1} align="center" fixed sortable>
-            <HeaderCell>Id</HeaderCell>
+          <Column flexGrow={1} align="center" fixed sortable style={{height: '50px'}}>
+            <HeaderCell style={{fontSize:'25px'}}>Id</HeaderCell>
             <Cell dataKey="id" />
 
           </Column>
@@ -150,11 +147,11 @@ function ListProperties() {
           <Column flexGrow={.5} fixed="right">
             <HeaderCell></HeaderCell>
 
-            <Cell>
+            <Cell style={{display: 'flex', justifyContent: 'center', marginLeft: 'auto'}}>
               {rowData => (
                 <span>
                   {/* <a onClick={() => alert(`id:${rowData.id}`)}> Options </a> */}
-                  <Button color="red" appearance="primary" onClick={async () => {setModalDataProperty(rowData); setShowModalProperty(true)}}>
+                  <Button color="red" appearance="primary"  onClick={async () => {setModalDataProperty(rowData); setShowModalProperty(true)}}>
                     View
                   </Button>
                 </span>
