@@ -150,7 +150,6 @@ function ListProperties() {
             <Cell style={{display: 'flex', justifyContent: 'center', marginLeft: 'auto'}}>
               {rowData => (
                 <span>
-                  {/* <a onClick={() => alert(`id:${rowData.id}`)}> Options </a> */}
                   <Button color="red" appearance="primary"  onClick={async () => {setModalDataProperty(rowData); setShowModalProperty(true)}}>
                     View
                   </Button>
