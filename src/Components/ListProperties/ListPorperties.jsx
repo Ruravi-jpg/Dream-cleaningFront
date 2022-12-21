@@ -99,8 +99,6 @@ function ListProperties() {
     }, 500);
   };
 
-
-
   useEffect(() => {
     fetchData();
   }, [])
