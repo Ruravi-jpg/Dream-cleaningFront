@@ -10,7 +10,10 @@ const login = async (username, password) => {
             password,
         },{
             headers:{
-                'Access-Control-Allow-Origin' : "*"  
+                'Access-Control-Allow-Origin' : "*",
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Headers': "content-type",
+                'Access-Control-Allow-Methods' : "PUT, POST, GET, DELETE, PATCH, OPTIONS" 
             }
         });
     if (response.data.token) {
