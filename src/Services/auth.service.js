@@ -10,7 +10,7 @@ const login = async (username, password) => {
             password,
         },{
             headers:{
-                'Access-Control-Allow-Origin' : http.getUri()  
+                'Access-Control-Allow-Origin' : "*"  
             }
         });
     if (response.data.token) {
