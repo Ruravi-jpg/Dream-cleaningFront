@@ -3,19 +3,20 @@ import http from "./http";
 const API_LOGIN_URL = "/api/gatekeepr/login";
 
 
-const login = (username, password) => {
-    return http
-    .post(  API_LOGIN_URL,{
-        username,
-        password,
-    })
-    .then(response => {
-        if(response.data.token){
-            localStorage.setItem("user", JSON.stringify(response.data))
-        }
-
-        return response.data;
-    })
+const login = async (username, password) => {
+    const response = await http
+        .post(API_LOGIN_URL, {
+            username,
+            password,
+        },{
+            headers:{
+                'Access-Control-Allow-Origin' : http.getUri()  
+            }
+        });
+    if (response.data.token) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    return response.data;
 
 }
 
