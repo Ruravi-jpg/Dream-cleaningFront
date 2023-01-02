@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
+    scroll-behavior: smooth;
 }
 
 .body {
@@ -120,7 +121,16 @@ font-weight: bold;
   width: 20%;
   height: 35%;
   text-align:center;
-  padding: 12px;;
+  padding: 12px;
+}
+
+.btnDark a{
+  text-decoration: none;
+  color: #fff;
+}
+.btnDark a:hover{
+  text-decoration: none;
+  color: #fff;
 }
 
 

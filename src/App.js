@@ -10,6 +10,7 @@ import authService from "./Services/auth.service.js";
 import PortectedRoute from "./Components/ProtectedRoute/ProtectedRoute.jsx";
 import AddProperty from "./Pages/AdddProperty.js";
 import PropertiesViewList from "./Pages/PropertyViewList.js";
+import AboutUsPage from "./Pages/AboutUsPage.js";
 
 function App() {
 let [currentUser, setCurrentUser] = useState(null);
@@ -35,6 +36,7 @@ useEffect(() =>{
 <Router>
   <Routes>
     <Route path="/" element={<Home/>}/>
+    <Route path="/aboutus" element={<AboutUsPage/>}/>
     <Route path="/login" element={ <Login user={currentUser} />  }></Route>
     <Route element = {<PortectedRoute Token={currentUser}/>}>
       <Route path="/dashboard"  element={ <Dashboard userData={currentUser}/> }></Route>

@@ -42,10 +42,15 @@ document.body.className = styles.body;
                     <p className={""  + styles.mainText}>
                       Family-owned company that specializes in  Cleaning services in Phoenix and Valley Area, Peoria, Glendale, Surprise, Goodyear and beyond.
                     </p>
-                    <button type="button" className={"btn btn-outline-light btn-lg " + styles.btnCarousel} onclick="window.location.href='#'">
-                      <i className="fa-solid fa-broom" /> VIEW CLEANING SERVICES
+                    
+                    <button type="button" className={"btn btn-outline-light btn-lg " + styles.btnCarousel} onClick="window.location.href='#'">
+                    <i className="fa-solid fa-broom" /> VIEW CLEANING SERVICES
+              
                     </button>
-                    <button type="button" className={"btn btn-outline-light btn-lg " + styles.btnCarousel} onclick="window.location.href='#'">
+                    <button type="button" className={"btn btn-outline-light btn-lg " + styles.btnCarousel} onClick={ () => document.getElementById("Contact").scrollIntoView({
+                     behavior : "auto",
+                     block :"center"
+                    })}>
                       <i className="fa-solid fa-phone" /> CONTACT
                     </button>
                   </div>
@@ -60,6 +65,7 @@ document.body.className = styles.body;
 
 
         {/*Features*/}
+        <section>
         <section id={styles.features}>
           <div className="row">
             <div className= {styles.featureBox + " col-lg-4"}>
@@ -76,6 +82,8 @@ document.body.className = styles.body;
             </div>
           </div>
         </section>
+        </section>
+       
 
 
         {/* Welcome */}
@@ -86,9 +94,13 @@ document.body.className = styles.body;
               <p className={styles.welcome}>
                 The Most reliable Company for your Cleaning Needs.<br /> Dreamco Cleaning is an Arizona family owned business that provides short term and commercial cleaning. Our company will deliver quality results and outstanding customer experience.</p>
               <div className="text-center">
-                <button type="button" className={"btn " + styles.btnDark + " btn-dark center-icon"} onclick>
+                
+                  <a href='/aboutus'>
+                  <button type="button" className={"btn " + styles.btnDark + " btn-dark center-icon"}>
                   <span>More info </span><i className="fa-solid fa-arrow-right" />
-                </button>
+                  </button>
+                  </a>
+                
               </div>
             </div>
             <div className={"col-lg " + styles.colForm}>
@@ -99,7 +111,7 @@ document.body.className = styles.body;
 
 
             {/* form Contact */}
-            <div className={"col-lg " + styles.colForm}>
+            <div className={"col-lg " + styles.colForm} id="Contact">
               <div className={styles.renderedForm}>
                 <div className>
                   <h1 access="false" id="control-6760272">Get a free Quote</h1></div>
