@@ -16,10 +16,10 @@ function Navbar() {
         <a className={"nav-link " + styles.menuLink} href="/">Home</a>
       </li>
       <li className={"nav-item " + styles.menuLi}>
-        <a className={"nav-link " + styles.menuLink} href="#Services">Cleaning Services</a>
+        <a className={"nav-link " + styles.menuLink} href="/#Services">Cleaning Services</a>
       </li>
       <li className={"nav-item " + styles.menuLi}>
-        <a className={"nav-link " + styles.menuLink} href="#Contact">Contact</a>
+        <a className={"nav-link " + styles.menuLink} href="/#Contact">Contact</a>
       </li>
       <li className={"nav-item " + styles.menuLi}>
         <a className={"nav-link " + styles.menuLink} href="/aboutus">About Us</a>

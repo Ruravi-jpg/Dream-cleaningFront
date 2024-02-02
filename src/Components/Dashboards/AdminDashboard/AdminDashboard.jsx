@@ -42,13 +42,13 @@ const AdminDashboard = () =>{
       <h2 className={styles.h2}>Add a new property</h2>
       <p>Add the information of a new property</p>
       <img className={styles.img} src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt="" />
-      <a href="/register-property"><div className={styles.myCtaButton}>Add</div></a>
+      <Link to="/register-property"><div className={styles.myCtaButton}>Add</div></Link>
     </div>
     <div className={"box box-down " + styles.boxDirty + " " + styles.blue+ " " + styles.boxDirtyDown}>
       <h2 className={styles.h2}>Assign work</h2>
-      <p>add an employee, property and time</p>
+      <p>Add an employee, property and time</p>
       <img className={styles.img} src="https://assets.codepen.io/2301174/icon-calculator.svg" alt="" />
-      <a href="/work-assigner-form.html"><div className={styles.myCtaButton}>Add</div></a>
+      <Link to="/assignwork"><div className={styles.myCtaButton}>Add</div></Link>
     </div>
   </div>
   <div className={styles.row2Container + " row2-container"}>

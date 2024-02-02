@@ -52,15 +52,16 @@ function ListProperties() {
 
   const fetchData = async () => {
     let response = await PropertyService.GetAll();
-    setData(response);
 
-    await EmployeeService.GetAll()
-    .then(res =>{
-        // const data = res.map(
-        //     item => ({label: item.user.username, value: item.id})
-        // );
-        setEmployeeList(res);        
-    })
+    if(response.status === 200)
+      setData(response.data);
+    console.log(response)
+    response = await EmployeeService.GetAll();
+
+    if(response.status === 200){
+      setEmployeeList(response.data);  
+    }
+
   }
 
   //sorting
@@ -109,7 +110,7 @@ function ListProperties() {
       <div className={styles.header}>
         <img src={logo} alt="" />
         <br /><br /><br /><br /><br /><hr className={styles.hr} />
-        <h1>Employee List</h1>
+        <h1>Properties List</h1>
       </div>
       <div className={"container "}>
         <Table

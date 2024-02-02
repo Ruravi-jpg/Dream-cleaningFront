@@ -1,0 +1,91 @@
+:root {
+    --color-grape: #000000;
+    --color-main: #F45B69;
+    --color-secondary: #FC6352;
+    --color-accent:  #FDA765;
+    --color-accent-secondary: #575757;
+    --color-white: #FFFFFF;
+    --color-accept: #94BD49;
+    
+    --font-serif: "Playfair Display", serif;
+    --font-sans: "IBM Plex Sans", sans-serif;
+  }
+  
+  
+  .tHeading {
+    font-size: 2rem;
+    line-height: 1.75;
+  }
+  
+  .tBody {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+  
+  .componentHeading {
+    text-align: center;
+  }
+  
+  .daySelector {
+    margin: 0;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+  }
+  
+  .daySelectorDay {
+    margin: 0 10px;
+    border-radius: 10px;
+    padding: 10px 15px;
+    width: 75px;
+    border: 2px solid var(--color-secondary);
+    list-style-type: none; /* remove bullets */
+    text-align: center;
+    box-sizing: border-box;
+    transition: .3s ease background-color;
+  }
+
+  .daySelectorDay[data-has-work="false"] {
+    background-color: background-color;
+    color: var(--color-accent-secondary);
+  }
+
+  .daySelectorDay[data-has-work="true"] {
+    background-color: var(--color-main);
+    color: var(--color-white);
+  }
+   
+  .daySelectorDayClicked{
+    border-color: var(--color-accept);
+    border-width: 5px;
+  }
+
+  .daySelectorDay::before {
+    content: "\200B"; /* reintroduce semantics for assistive technologies */
+    position: absolute;
+  }
+  
+  .daySelectorDay:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  
+
+  .stylessList{
+    list-style-type: none; 
+    margin-bottom: 1rem;
+  }
+
+  .addButton{
+    color: var(--color-secondary);
+    margin-left: 10px;
+  }
+
+  .textBox{
+    text-align: center;
+    padding: 1rem;
+    font-size: x-large;
+  }

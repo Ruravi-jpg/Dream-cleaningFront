@@ -43,7 +43,8 @@ function ListEmployees() {
 
   const fetchData = async () => {
     const response = await EmployeeService.GetAll();
-    setData(response);
+    if(response.status === 200)
+      setData(response.data);
   }
 
 
@@ -137,7 +138,6 @@ function ListEmployees() {
             <Cell>
               {rowData => (
                 <span>
-                  {/* <a onClick={() => alert(`id:${rowData.id}`)}> Options </a> */}
                   <Button color="red" appearance="primary" onClick={() => {setModalDataEmployee(rowData); setShowModalEmployee(true)}}>
                     View
                   </Button>

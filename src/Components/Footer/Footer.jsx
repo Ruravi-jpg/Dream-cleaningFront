@@ -32,7 +32,7 @@ function Footer(){
             </div></section>
           {/* Section: Social media */}
           {/* Section: Links  */}
-          <section className>
+          <section >
             <div className="container text-center text-md-start mt-5">
               {/* Grid row */}
               <div className="row mt-3">

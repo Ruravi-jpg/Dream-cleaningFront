@@ -1,0 +1,39 @@
+:root {
+    --color-grape: #000000;
+    --color-main: #F45B69;
+    --color-secondary: #FC6352;
+    --color-accent:  #FDA765;
+    --color-accent-secondary: #575757;
+    --color-white: #FFFFFF;
+    --color-accept: #94BD49;
+    
+    --font-serif: "Playfair Display", serif;
+    --font-sans: "IBM Plex Sans", sans-serif;
+  }
+
+
+  Button[data-function="clean"]{
+    color: var(--color-white);
+    background-color: var(--color-accent);
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--color-accent);
+  }
+
+  Button[data-function="clean"]:hover{
+    color: var(--color-accent);
+    background-color: var(--color-white);
+  }
+
+  Button[data-function="close"]{
+    color: var(--color-white);
+    background-color: var(--color-accept);
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--color-accept);
+  }
+
+  Button[data-function="close"]:hover{
+    color: var(--color-accept);
+    background-color: var(--color-white);
+  }

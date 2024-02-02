@@ -42,8 +42,11 @@ document.body.className = styles.body;
                     <p className={""  + styles.mainText}>
                       Family-owned company that specializes in  Cleaning services in Phoenix and Valley Area, Peoria, Glendale, Surprise, Goodyear and beyond.
                     </p>
-                    
-                    <button type="button" className={"btn btn-outline-light btn-lg " + styles.btnCarousel} onClick="window.location.href='#'">
+
+                    <button type="button" className={"btn btn-outline-light btn-lg " + styles.btnCarousel} onClick={() => document.getElementById("Services").scrollIntoView({
+                     behavior : "auto",
+                     block :"center"
+                    })}>
                     <i className="fa-solid fa-broom" /> VIEW CLEANING SERVICES
               
                     </button>
@@ -113,7 +116,7 @@ document.body.className = styles.body;
             {/* form Contact */}
             <div className={"col-lg " + styles.colForm} id="Contact">
               <div className={styles.renderedForm}>
-                <div className>
+                <div>
                   <h1 access="false" id="control-6760272">Get a free Quote</h1></div>
                 <div className="formbuilder-text form-group field-name">
                   <label htmlFor="name" className="formbuilder-text-label">Name<span className="formbuilder-required">*</span></label>
@@ -153,17 +156,17 @@ document.body.className = styles.body;
         <hr style={{color: '#d15149'}} />
 
         
-        <div className={styles.containerServices}>
+        <div className={styles.containerServices} id="Services">
           <div className="row">
             <h1 className={styles.titleServices}>Cleaning Services</h1>
             <div className="col-lg-4 d-flex justify-content-center">
               <div className={"card " + styles.cardDirty}>
                 <figure className={"card__thumb " + styles.cardThumb}>
-                  <img src={CleaningAirbnb} alt="Picture by Kyle Cottrell" className={"card__image " + styles.cardImage} />
+                  <img src={CleaningAirbnb} className={"card__image " + styles.cardImage} />
                   <figcaption className={"card__caption " + styles.cardCaption}>
                     <h2 className={"card__title " + styles.cardTitle}>Airbnb – VRBO – Vacation Rental Cleaning Services</h2>
                     <p className={"card__snippet " + styles.cardSnippet}>Phoenix is a great place to vacation! With incredible museums like the Phoenix Art Museum, the breathtaking Desert Botanical Garden, hiking spots like Camelback Mountain, and award-winning golf courses and resorts like the Arizona Biltmore Resort, it’s no wonder why people come from around the country to spend some time</p>
-                    <a href className={"card__button " + styles.cardButton}>Read more</a>
+                    <a href="#" className={"card__button " + styles.cardButton}>Read more</a>
                   </figcaption>
                 </figure>
               </div>
@@ -172,11 +175,11 @@ document.body.className = styles.body;
             <div className="col-lg-4 d-flex justify-content-center">
               <div className={"card-index " + styles.cardDirty}>
                 <figure className={"card__thumb " + styles.cardThumb}>
-                  <img src={Cleaninghouse} alt="Picture by Nathan Dumlao" className={"card__image " + styles.cardImage} />
+                  <img src={Cleaninghouse} className={"card__image " + styles.cardImage} />
                   <figcaption className={"card__caption " + styles.cardCaption}>
                     <h2 className={"card__title " + styles.cardTitle}>Commercial Building Cleaning Services</h2>
                     <p className={"card__snippet " + styles.cardSnippet}>If you own or manage a commercial facility, you know how important cleanliness is to your bottom line. Not only does regular cleaning and disinfecting boost employee productivity and decrease sick leave, but the appearance of your building directly relates to how credible people find your business to be.</p>
-                    <a href className={"card__button " + styles.cardButton}>Read more</a>
+                    <a href="#" className={"card__button " + styles.cardButton}>Read more</a>
                   </figcaption>
                 </figure>
               </div>

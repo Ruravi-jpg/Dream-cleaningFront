@@ -1,17 +1,15 @@
-import EmployeeService from '../../Services/employee.service';
-
-
 import logo from '../../Assets/mainPageImages/logodreamco-ConvertImage.png'
 import styles from './registerProperty.module.css'
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, TagPicker, Modal , Loader, Notification, useToaster} from 'rsuite';
+import { Form, Modal , Loader, Notification, useToaster, Input} from 'rsuite';
 import FileUpload from "../DragAndDrop/DragAndDrop"
 import PropertyCreateModel from '../../Models/PropertyRegisterModel';
 import PropertyService from '../../Services/property.service';
 import getIdFromUrl from '../../Services/getIdFromUrl';
+import React from 'react';
 
-
+const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
 function RegisterProperty() {
 
@@ -27,13 +25,10 @@ function RegisterProperty() {
         hoursService: 0,
         costService: 0,
         comments: "",
-        referencePhotosList: [],
-        employeeIdList: []
+        referencePhotosList: []
     });
 
     const [referencePhotosList, setReferencePhotosList] = useState([]);
-    const [employeeData, setEmployeeData] = useState([]);
-    const [employeesList, setEmployeesList] = useState([]);
     const [openModal, setOpenModal] = useState(false);
 
     const navigate = useNavigate();
@@ -63,44 +58,12 @@ function RegisterProperty() {
     }
 
     useEffect(() =>{
-        fetchData();
-    },[])
-
-    useEffect(() =>{
         let property = propertyData;
 
         property.referencePhotosList = referencePhotosList;
 
         setPropertyData(property);
     },[referencePhotosList])
-
-    useEffect(() =>{
-        let property = propertyData;
-
-        property.employeeIdList = employeesList;
-        setPropertyData(property);
-    },[employeesList])
-
-    const fetchData = async () => {
-        await EmployeeService.GetAll()
-        .then(res =>{
-            const data = res.map(
-                item => ({label: item.user.username, value: item.id})
-            );
-            setEmployeeData(data);        
-        })
-    }
-
-    const onEmployeeListChange = (value) =>{
-        if(value == null){
-            setEmployeesList([])
-            return;
-        }
-            
-
-        const employeeId = value.filter(e => Number.isInteger(e));
-        setEmployeesList(employeeId)
-    }
 
 
     const messageSuccess = (
@@ -216,33 +179,19 @@ function RegisterProperty() {
                                         </div>
                                     </div>
                                     {/* textarea */}
-                                    <div className={"form-group col-md " + styles.oneColumnInput}>
+                                    <div className={"form-group"}>
                                         <Form.ControlLabel htmlFor="pcomments">Comments</Form.ControlLabel>
                                         <Form.Control
-                                            className={"form-control " + styles.registerInput} 
-                                            rows={3}
+                                            className={"form-control " + styles.registerInput}
+                                            style={{width:"100%"}}
+                                            rows={2}
                                             name="comments"
                                             id="pcomments"
-
+                                            accepter={Textarea}
                                         />
                                     </div>
-                                    <hr className={styles.hr}></hr>
-                                        <div className={"form-group col-md " + styles.oneColumnInput}>
-                                            <div>
-                                                <Form.ControlLabel htmlFor="employees">Select the employees to add to this property </Form.ControlLabel>
-                                                <br />
-                                                <TagPicker 
-                                                className={"form-control " + styles.registerInput} 
-                                                data={employeeData} 
-                                                style={{ width: 300 }} 
-                                                onChange={(value, event) => {  onEmployeeListChange(value);/*setEmployeesList(value)*/}}
-                                                
-                                                />
-                                            </div>
-                                        </div>
-                                    <hr className={styles.hr}></hr>
                                     {/* Input type file */}
-                                    <div className="form-group">
+                                    <div className={"form-group "}>
                                         <FileUpload
                                             accept=".jpg,.png,.jpeg"
                                             label="Add property reference photo(s)"

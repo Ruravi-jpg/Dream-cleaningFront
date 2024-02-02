@@ -52,13 +52,31 @@ const GetAll = async () =>{
             console.log(error);
         })
 
-    return data.data;
+    return data;
+}
+
+const GetByUserId = async (userId) =>{
+    return await http
+   .get(API_EMPLOYEE_URL + '/users/' + userId,
+       {
+           headers:{
+               'Authorization' : authHeader()
+           }
+       })
+       .then(response =>{
+            return response;
+       })
+       .catch(error =>{
+           return error;
+       })
+
 }
 
 const EmployeeService = {
     post,
     put,
-    GetAll
+    GetAll,
+    GetByUserId
 }
 
 export default EmployeeService;

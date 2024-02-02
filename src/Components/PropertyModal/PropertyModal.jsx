@@ -1,10 +1,8 @@
 
 import { useEffect } from "react";
 import { useState, React } from "react";
-import { Form, Button, Modal, Notification, useToaster, IconButton, List, SelectPicker, FlexboxGrid } from 'rsuite';
-import FormControl from "rsuite/esm/FormControl";
+import { Form, Button, Modal, Notification, useToaster} from 'rsuite';
 import PropertyUpdateModel from "../../Models/PropertyUpdateModal";
-import EmployeeService from "../../Services/employee.service";
 import PropertyService from "../../Services/property.service";
 import FileUpload from "../DragAndDrop/DragAndDrop";
 
@@ -15,8 +13,7 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
   const [editingPhotos, setIsEditingPhotos] = useState(false);
   const [referencePhotosList, setReferencePhotosList] = useState([]);
   const [fetchingImages, setFetchingImages] = useState(true);
-  const [curEmployeeList, setCurEmployeeList] = useState([]);
-  const [propertyData, setPropertyData] = useState([]);
+  const [propertyData, setPropertyData] = useState({});
   const toaster = useToaster();
 
 
@@ -27,10 +24,6 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
   useEffect(() => {
     if (showModalProperty) {
       fetchPhotos();
-      if (data.employeesList != null) {
-        setCurEmployeeList(data.employeesList)
-      }
-
       setPropertyData(data);
 
     }
@@ -59,12 +52,19 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
   const fetchPhotos = async () => {
 
     setFetchingImages(true);
-    if (!data.referencePhotosList)
+    if (!data.referencePhotosList){
+      setFetchingImages(false);
       return;
+    }
+      
 
     let photoList = [];
     for (let guid of data.referencePhotosList) {
       let photo = await PropertyService.getPhotos(data.id, guid);
+      if(photo.status !== 200){
+        setFetchingImages(false);
+        return;
+      }
       let file = new File([photo.data], guid, {
         type: photo.headers["content-type"]
       });
@@ -83,8 +83,6 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
 
 
   const handleEdit = async () => {
-    let employeeIdList = curEmployeeList.map(employee => employee.id);
-
     let update = new PropertyUpdateModel(
       propertyData.alias,
       propertyData.address,
@@ -92,17 +90,12 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
       propertyData.btwnStreet2,
       propertyData.hoursService,
       propertyData.costService,
-      propertyData.comments,
-      employeeIdList
+      propertyData.comments
     )
-    console.log(update)
-    
-    
     
 
     //if we are only editing th data and not the images
     if (!editingPhotos) {
-      console.log("editing only data");
       const postResponse = await PropertyService.put(update, propertyData.id);
       if (postResponse) {
         toaster.push(messageSuccess);
@@ -134,39 +127,6 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
     fetchData();
   }
 
-  const onEmployeeListChange = (value) => {
-    if (value == null) {
-      return;
-    }
-
-    const userToAdd = allEmployeeList.filter(e => e.id === value);
-
-    let isInList = false;
-
-    for (let i = 0; i < curEmployeeList.length; i++) {
-      if (curEmployeeList[i].id === userToAdd[0].id) {
-        isInList = true;
-        break;
-      }
-    }
-
-
-    if (!isInList) {
-      setIsEditing(true);
-      let newArray = curEmployeeList.concat(userToAdd);
-      setCurEmployeeList(newArray);
-    }
-  }
-
-  const removeEmployeeFromList = (id) => {
-    setIsEditing(true);
-
-    console.log("Removing employee wit id: ", id)
-
-    let newArray = curEmployeeList.filter(employee => employee.id !== id);
-
-    setCurEmployeeList(newArray);
-  }
 
   const messageSuccess = (
     <Notification type={"success"} header={"Success"} closable>
@@ -230,57 +190,6 @@ export default function PropertyModal({ fetchData, data, setData, showModalPrope
             <Form.Group controlId="textarea-9">
               <Form.ControlLabel> <b>Comments</b> </Form.ControlLabel>
               <Form.Control rows={5} name="comments" />
-            </Form.Group>
-            <Form.Group controlId="employeesList-9">
-              <Form.ControlLabel> <b>Assigned Employees</b> </Form.ControlLabel>
-
-              <FormControl name="EmployeeListPicker" data={selectData} accepter={SelectPicker} style={{ width: 224, zIndex: 1000 }} onChange={(value) => onEmployeeListChange(value)} />
-              <br />
-              <br />
-              <List>
-                {
-                  curEmployeeList ? (
-                    curEmployeeList.map(employee => {
-                      return (
-                        <List.Item
-                          key={employee.id}
-                        >
-                          <FlexboxGrid>
-                            <FlexboxGrid.Item
-                              style={{
-                                display: 'flex',
-                                justifyContent: 'left',
-                                alignItems: 'left',
-                                height: '30px',
-                                width: '200px'
-                              }}
-                            >
-                              {employee.name}
-                            </FlexboxGrid.Item>
-                            <FlexboxGrid.Item
-                              style={{
-                                display: 'flex',
-                                justifyContent: 'left',
-                                alignItems: 'left',
-                                height: '30px'
-
-                              }}
-                            >
-                              <IconButton icon={<i className="bi bi-x-circle"></i>} circle size="md" style={{ color: 'red', background: "#ffffff" }} onClick={() => removeEmployeeFromList(employee.id)} />
-                            </FlexboxGrid.Item>
-                          </FlexboxGrid>
-                        </List.Item>
-                      )
-                    })
-                  ) :
-                    <List.Item > No Employees </List.Item>
-                }
-              </List>
-
-              <br />
-
-
-
             </Form.Group>
             <Form.Group controlId="referencePhotosList-9">
               <Form.Group>

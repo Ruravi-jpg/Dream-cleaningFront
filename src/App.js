@@ -11,6 +11,8 @@ import PortectedRoute from "./Components/ProtectedRoute/ProtectedRoute.jsx";
 import AddProperty from "./Pages/AdddProperty.js";
 import PropertiesViewList from "./Pages/PropertyViewList.js";
 import AboutUsPage from "./Pages/AboutUsPage.js";
+import AssignWorkPage from "./Pages/AssignWork.js";
+import ListAsignedWorkEmployee from "./Components/LIstAsignedHouses/ListAsignedWorkEmployee.jsx";
 
 function App() {
 let [currentUser, setCurrentUser] = useState(null);
@@ -45,6 +47,8 @@ useEffect(() =>{
       <Route path="/employees" element={ <EmployeeViewList user ={currentUser} /> }></Route>
       <Route path="/properties" element={ <PropertiesViewList user ={currentUser} /> }></Route>
       <Route path="/tableDashboard" element={<SelectTable userData = {currentUser} />}></Route>
+      <Route path="/assignwork" element={<AssignWorkPage userData = {currentUser} />}></Route>
+      <Route path="/asignedWorkEmployee" element={<ListAsignedWorkEmployee userData = {currentUser}></ListAsignedWorkEmployee>}></Route>
     </Route>
     
   </Routes>
